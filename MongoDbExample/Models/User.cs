@@ -30,6 +30,9 @@ namespace MongoDbExample.Models
         [BsonRepresentation(BsonType.String)]
         public string ProfilePthotoPath { get; set; }
 
+        [BsonDefaultValue(null)]
+        public byte[] ProfilePhoto { get; set; }
+
         [BsonRepresentation(BsonType.String)]
         public string SelfDescription { get; set; }
 

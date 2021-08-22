@@ -7,7 +7,7 @@ using MongoDB.Bson;
 
 namespace MongoDbExample.Models
 {
-    public class Tweet
+    public class Post
     {
         [BsonRequired]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -24,11 +24,14 @@ namespace MongoDbExample.Models
         public string ContentMediaPath { get; set; }
 
         [BsonRequired]
-        [BsonRepresentation(BsonType.Document)]
-        public User Author { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string AuthorId { get; set; }
+
+        [BsonDefaultValue(null)]
+        public byte[] Photo { get; set; }
 
         [BsonRepresentation(BsonType.Array)]
-        public Tweet[] Replies { get; set; }
+        public string[] Liked { get; set; }
 
         public bool HasImage()
         {
