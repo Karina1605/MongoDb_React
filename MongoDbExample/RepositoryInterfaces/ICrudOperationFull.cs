@@ -7,7 +7,6 @@ namespace MongoDbExample.RepositoryInterfaces
 {
     public interface ICrudOperationFull<T> :ICrudOperation<T>
     {
-        public Task<T> Update(T item);
-        public Task<IEnumerable<T>> GetByAttrubutes(object attrubutes);
+        public Task<bool> Update(T item);
     }
 }

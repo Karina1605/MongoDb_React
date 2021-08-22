@@ -6,7 +6,7 @@ using MongoDbExample.Models;
 
 namespace MongoDbExample.RepositoryInterfaces
 {
-    public class ISocialNetworkDataBase
+    public interface ISocialNetworkDataBase
     {
         ICrudOperationFull<User> Users { get; }
         ICrudOperation<Post> Posts {get; set;}
