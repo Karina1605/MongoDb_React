@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace MongoDbExample.Implementation.CollectionImplementation
 {
-    public class PostRepository : ICrudOperation<Post>
+    public class PostRepository : ICrudOperation<Tweet>
     {
-        private IMongoCollection<Post> _posts;
-        public PostRepository(IMongoCollection<Post> posts)
+        private IMongoCollection<Tweet> _posts;
+        public PostRepository(IMongoCollection<Tweet> posts)
         {
             _posts = posts;
         }
 
-        public async Task<bool> Create(Post item)
+        public async Task<bool> Create(Tweet item)
         {
             try
             {
@@ -31,11 +31,11 @@ namespace MongoDbExample.Implementation.CollectionImplementation
             }
         }
 
-        public async Task<bool> Delete(Post item)
+        public async Task<bool> Delete(string id)
         {
             try
             {
-                await _posts.DeleteOneAsync(new BsonDocument("_id", new ObjectId(item.Id)));
+                await _posts.DeleteOneAsync(new BsonDocument("_id", new ObjectId(id)));
                 return true;
             }
             catch
@@ -44,12 +44,12 @@ namespace MongoDbExample.Implementation.CollectionImplementation
             }
         }
 
-        public async Task<IEnumerable<Post>> GetByAttrubutes(IFilterAttributes attrubutes)
+        public async Task<IEnumerable<Tweet>> GetByAttrubutes(IFilterAttributes attrubutes)
         {
             var obj = attrubutes as PostFilter;
             if (obj == null)
                 throw new Exception("Wrong filter");
-            var buildier = new FilterDefinitionBuilder<Post>();
+            var buildier = new FilterDefinitionBuilder<Tweet>();
             var filter = buildier.Empty;
             DateTime today = DateTime.Now;
             if (obj.EarliestDate != null)
@@ -67,16 +67,16 @@ namespace MongoDbExample.Implementation.CollectionImplementation
 
         }
 
-        public async Task<Post> GetById(string id)
+        public async Task<Tweet> GetById(string id)
         {
             return await _posts.Find(new BsonDocument("_id", new ObjectId(id))).FirstOrDefaultAsync();
         }
 
-        public async Task<bool> Update(Post item)
+        public async Task<bool> Update(Tweet item)
         {
             try
             {
-                await _posts.ReplaceOneAsync(new BsonDocument("_id", new ObjectId(item.Id)), item);
+                await _posts.ReplaceOneAsync(new BsonDocument("_id", item.Id), item);
                 return true;
             }
             catch

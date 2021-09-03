@@ -7,11 +7,11 @@ using MongoDB.Bson;
 
 namespace MongoDbExample.Models
 {
-    public class Post
+    public class Tweet
     {
-        [BsonRequired]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        [BsonElement("_id")]
+        public ObjectId Id { get; set; }
 
         [BsonRequired]
         [BsonRepresentation(BsonType.DateTime)]
@@ -30,7 +30,6 @@ namespace MongoDbExample.Models
         [BsonDefaultValue(null)]
         public byte[] Photo { get; set; }
 
-        [BsonRepresentation(BsonType.Array)]
         public string[] Liked { get; set; }
 
         public bool HasImage()
