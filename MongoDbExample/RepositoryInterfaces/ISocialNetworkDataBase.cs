@@ -8,7 +8,7 @@ namespace MongoDbExample.RepositoryInterfaces
 {
     public interface ISocialNetworkDataBase
     {
-        ICrudOperationFull<User> Users { get; }
-        ICrudOperation<Post> Posts {get; set;}
+        ICrudOperation<User> Users { get; }
+        ICrudOperation<Tweet> Posts {get;}
     }
 }

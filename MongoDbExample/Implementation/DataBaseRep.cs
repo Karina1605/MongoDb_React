@@ -11,17 +11,21 @@ namespace MongoDbExample.Implementation
 {
     public class DataBaseRep : ISocialNetworkDataBase
     {
-        public ICrudOperationFull<User> Users { get; private set; }
-        public ICrudOperation<Post> Posts { get; private set; }
+        public ICrudOperation<User> Users { get; private set; }
+        public ICrudOperation<Tweet> Posts { get; private set; }
 
         public DataBaseRep(string connectionString)
         {
             var connection = new MongoUrlBuilder(connectionString);
             MongoClient client = new MongoClient(connectionString);
-            IMongoDatabase database = client.GetDatabase("SocialNetworkExample");
-
-            Users = new UserRepository(database.GetCollection<User>("Users"));
-            Posts = new PostRepository(database.GetCollection<Post>("Posts"));
+            IMongoDatabase database = client.GetDatabase(connection.DatabaseName);
+            var databases = client.ListDatabaseNames();
+            var names = databases.ToList();
+            var name = database.ListCollectionNames();
+            var users = database.GetCollection<User>("Users");
+            var posts = database.GetCollection<Tweet>("Tweets");
+            Users = new UserRepository(users);
+            Posts = new PostRepository(posts);
         }
     }
 }
