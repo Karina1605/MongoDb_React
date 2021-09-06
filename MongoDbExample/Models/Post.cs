@@ -27,9 +27,7 @@ namespace MongoDbExample.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string AuthorId { get; set; }
 
-        [BsonDefaultValue(null)]
-        public byte[] Photo { get; set; }
-
+        
         public string[] Liked { get; set; }
 
         public bool HasImage()
