@@ -25,9 +25,14 @@ namespace MongoDbExample.Models
 
         [BsonRequired]
         [BsonRepresentation(BsonType.ObjectId)]
+<<<<<<< Updated upstream
         public string Author { get; set; }
 
         [BsonRepresentation(BsonType.Array)]
+=======
+        public string AuthorId { get; set; }
+
+>>>>>>> Stashed changes
         public string[] Liked { get; set; }
 
         public bool HasImage()
