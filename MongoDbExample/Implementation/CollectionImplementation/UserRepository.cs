@@ -80,8 +80,9 @@ namespace MongoDbExample.Implementation.CollectionImplementation
         {
             var buildier = new FilterDefinitionBuilder<User>();
             var filter = buildier.Empty;
+            var obId = new ObjectId(id);
             filter = buildier.Eq("_id", new ObjectId(id));
-            var res = await _users.Find(new BsonDocument("_id", new ObjectId(id))).FirstOrDefaultAsync();
+            var res = await _users.Find(e=>e.Id == obId).FirstOrDefaultAsync();
             return res;
         }
 
