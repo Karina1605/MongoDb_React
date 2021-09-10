@@ -17,6 +17,7 @@ namespace MongoDbExample
 {
     public class Startup
     {
+        private string allowAll = "AllowAll";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,7 +28,16 @@ namespace MongoDbExample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllers();
+            services.AddCors(options=>
+            {
+                options.AddPolicy(name: allowAll, buildier => buildier
+                                                    .AllowAnyOrigin()
+                                                    .AllowAnyHeader()
+                                                    .AllowAnyMethod());
+
+            });
             string connection = Configuration.GetConnectionString("default");
             services.AddScoped<ISocialNetworkDataBase, DataBaseRep>(e => new DataBaseRep(connection));
         }
@@ -45,6 +55,7 @@ namespace MongoDbExample
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors(allowAll);
 
             app.UseEndpoints(endpoints =>
             {

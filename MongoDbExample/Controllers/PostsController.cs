@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDbExample.Filters;
 using MongoDbExample.Models;
@@ -12,6 +13,7 @@ namespace MongoDbExample.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowAll")]
     public class PostsController : ControllerBase
     {
         private readonly ISocialNetworkDataBase _repo;

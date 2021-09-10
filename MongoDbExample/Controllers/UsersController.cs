@@ -12,6 +12,7 @@ namespace MongoDbExample.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowAll")]
     public class UsersController : ControllerBase
     {
         private readonly ISocialNetworkDataBase _repo;
